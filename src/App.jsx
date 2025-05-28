@@ -9,7 +9,11 @@ const App = () => {
   return (
     <div className="app">
       <Header />
-      <main>
+      <main className="p-4">
+        <div className="flex items-center text-sm font-medium text-gray-700 mb-2">
+          <img src="/streakIcon.png" alt="Streak icon" className="h-4 w-4 mr-1" />
+          your streaks
+        </div>
         <StreakTracker />
         <ReminderCard /> 
         <ReminderCard />
