@@ -54,7 +54,7 @@ const App = () => {
           frequency="Everyday" 
         />
         
-        <div className="mt-6 mb-2 text-gray-700 font-medium">
+        <div className="mt-6 mb-2 text-[#858687] font-medium">
           completed goals
         </div>
         
