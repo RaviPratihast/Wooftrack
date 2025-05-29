@@ -60,7 +60,7 @@ const App = () => {
         
         <GoalItem title="morning walk" />
         
-        <div className="fixed bottom-8 right-4 z-10">
+        <div className="fixed bottom-22 right-4 z-10">
           <button 
             className="bg-[#24aa7f] text-white p-3.5 rounded-xl shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#02C878]"
             aria-label="Add new goal"
