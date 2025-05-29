@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from './components/Header';
 import StreakTracker from './components/StreakTracker';
+import TimeOfDayFilter from './components/TimeOfDayFilter';
 import ReminderCard from './components/ReminderCard';
 import GoalItem from './components/GoalItem';
 import BottomNav from './components/BottomNav';
@@ -15,6 +16,7 @@ const App = () => {
           your streaks
         </div>
         <StreakTracker />
+        <TimeOfDayFilter />
         <ReminderCard /> 
         <ReminderCard />
         <h2>Pending Goals</h2> 
