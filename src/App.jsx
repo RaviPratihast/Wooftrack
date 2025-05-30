@@ -70,6 +70,7 @@ const App = () => {
                   pet={reminder.pet}
                   time={reminder.time}
                   frequency={reminder.frequency}
+                  completed={reminder.completed}
                 />
               ))
             ) : (
