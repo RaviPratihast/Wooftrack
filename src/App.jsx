@@ -26,14 +26,14 @@ const App = () => {
     
     if (isPM && hour !== 12) {
       hour += 12;
-    } else if (!isPM && hour === 12) { // Midnight case
+    } else if (!isPM && hour === 12) { 
       hour = 0;
     }
 
     if (hour >= 5 && hour < 12) return 'Morning';
     if (hour >= 12 && hour < 17) return 'Afternoon';
     if (hour >= 17 && hour < 21) return 'Evening';
-    return 'Night'; // Covers 9 PM to 4 AM
+    return 'Night';
   };
 
   const groupedReminders = pendingReminders.reduce((acc, reminder) => {
