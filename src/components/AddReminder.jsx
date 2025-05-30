@@ -80,7 +80,7 @@ const AddReminder = () => {
 
   return (
     <div className="bg-[#f3f4f6] min-h-screen pb-10"> 
-      {/* Header */}
+    
       <div className="p-4 flex justify-between items-center bg-white shadow-sm sticky top-0 z-20 rounded-br-xl">
         <button onClick={handleBack} aria-label="Go back" className="cursor-pointer">
           <img src="/back button (1).svg" alt="Back" className="h-8 w-8" />
@@ -90,7 +90,7 @@ const AddReminder = () => {
       </div>
 
       <div className="p-4 space-y-5">
-        {/* Select Pet & Category */}
+
         <div className="flex gap-4">
           <div className="flex-1">
             <label className="text-xs text-gray-500 mb-2 block">Select Pet</label>
