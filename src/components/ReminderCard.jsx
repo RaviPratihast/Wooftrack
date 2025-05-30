@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useReminders } from '../context/ReminderContext';
 
 const ReminderCard = ({ 
@@ -10,9 +11,15 @@ const ReminderCard = ({
   completed
 }) => {
   const { toggleComplete } = useReminders();
+  const navigate = useNavigate();
 
   const handleCardClick = () => {
     toggleComplete(id);
+  };
+
+  const handleEditClick = (e) => {
+    e.stopPropagation();
+    navigate(`/edit/${id}`);
   };
 
   return (
@@ -22,7 +29,12 @@ const ReminderCard = ({
     >
       <div className="flex justify-between items-center">
         <h3 className={`text-lg font-semibold ${completed ? 'line-through text-gray-500' : 'text-gray-800'}`}>{title}</h3>
-        <img src="/expand-01.svg" alt="expand" className="h-4 w-4 opacity-70 cursor-pointer" />
+        <img 
+          src="/expand-01.svg" 
+          alt="Edit Reminder" 
+          className="h-4 w-4 opacity-70 cursor-pointer" 
+          onClick={handleEditClick} 
+        />
       </div>
       
       <div className={`flex items-center gap-4 mt-3 ${completed ? 'text-gray-500' : 'text-gray-600'}`}>
