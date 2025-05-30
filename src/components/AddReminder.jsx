@@ -15,6 +15,8 @@ const AddReminder = () => {
   const selectedPet = 'Browny';
   const selectedCategory = 'General';
 
+  const [errors, setErrors] = useState({});
+
   const handleBack = () => {
     navigate(-1); 
   };
@@ -25,6 +27,9 @@ const AddReminder = () => {
 
   const handleReminderTextChange = (e) => {
     setReminderText(e.target.value);
+    if (errors.reminderText) {
+      setErrors(prev => ({...prev, reminderText: null}));
+    }
   };
   
   const handleNotesTextChange = (e) => {
@@ -39,7 +44,20 @@ const AddReminder = () => {
     setReminderTime(e.target.value);
   };
 
+  const validateForm = () => {
+    const newErrors = {};
+    if (!reminderText.trim()) {
+      newErrors.reminderText = 'Reminder title/description is required.';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleSaveReminder = () => {
+    if (!validateForm()) {
+      return;
+    }
 
     const newReminder = {
       title: reminderText,
@@ -107,13 +125,16 @@ const AddReminder = () => {
                   value={reminderText}
                   onChange={handleReminderTextChange}
                   placeholder="Type here..."
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-1 focus:ring-[#02C878] focus:border-[#02C878] !text-[16px]"
+                  className={`w-full p-3 border rounded-lg focus:ring-1 !text-[16px] ${errors.reminderText ? 'border-red-500 focus:ring-red-400 focus:border-red-500' : 'border-gray-300 focus:ring-[#02C878] focus:border-[#02C878]'}`}
                   maxLength={100}
+                  aria-invalid={errors.reminderText ? "true" : "false"}
+                  aria-describedby={errors.reminderText ? "reminderText-error" : undefined}
                 />
                 <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-xs text-gray-400">
                   {reminderText.length}/100
                 </span>
               </div>
+              {errors.reminderText && <p id="reminderText-error" className="text-red-500 text-xs ml-4 mt-1">{errors.reminderText}</p>}
             </div>
             <div className="flex justify-between items-center pt-2">
               <label className="text-[16px] font-medium text-neutral-700">Add Notes (Optional)</label>
