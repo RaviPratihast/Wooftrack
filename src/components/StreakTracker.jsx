@@ -1,5 +1,4 @@
 import React from 'react';
-import { ChevronDownIcon } from '@heroicons/react/24/solid'; 
 
 const StreakTracker = () => {
 
@@ -15,28 +14,28 @@ const StreakTracker = () => {
 
   return (
     <div className="bg-[#02c878] p-4 rounded-lg text-white shadow-md">
-      <div className="flex justify-between items-center mb-3">
-        <h3 className="font-semibold text-sm">march 2023</h3>
+      <div className="flex justify-center items-center text-black mb-4">
+        <h3 className="font-semibold text-xs">march 2023</h3>
       </div>
       <div className="flex justify-around mb-2">
         {days.map((item) => (
           <div key={item.date} className="text-center">
             <div 
-              className={`text-xs mb-0.5 font-medium ${ 
-                item.status === 'past' || item.status === 'future' ? 'text-[#e0f9ed]' : 'text-white'
+              className={`text-[11px] mb-0.5 font-medium text-black ${ 
+                item.status === 'past' || item.status === 'future' ? 'text-opacity-70' : ''
               }`}
             >
               {item.day}
             </div>
             <div 
-              className={`mt-1 w-8 h-8 flex items-center justify-center rounded-full text-sm font-bold 
+              className={`mt-1 w-8 h-8 flex items-center justify-center rounded-full text-[16px] font-bold 
                           ${ item.status === 'active' 
-                              ? 'bg-[#b9ff7d] text-[#02a064]' 
+                              ? 'bg-[#b9ff7d] text-black' 
                               : item.status === 'past' 
-                                  ? 'text-[#e0f9ed] bg-[#02c878]' 
-                                  : 'text-[#e0f9ed] bg-[#02c878]'
+                                  ? 'text-[#e0f9ed] bg-[#53ca9a]' 
+                                  : 'text-[#e0f9ed] bg-[#53ca9a]'
                           }
-                          ${item.current ? 'ring-2 ring-[#e0f9ed]' : ''} // Ring for current day
+                          ${item.current ? '' : ''} // Ring for current day
                         `}
             >
               {item.date}
@@ -45,7 +44,8 @@ const StreakTracker = () => {
         ))}
       </div>
       <div className="flex justify-center mt-1">
-        <ChevronDownIcon className="h-5 w-5 text-[#e0f9ed]" /> 
+        {/* <ChevronDownIcon className="h-5 w-5 text-[#e0f9ed]" /> */}
+        <img src="/Dropdown Icon.svg" alt="dropdown" className="h-5 w-5" /> 
       </div>
     </div>
   );
