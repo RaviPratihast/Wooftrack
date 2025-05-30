@@ -16,9 +16,36 @@ const App = () => {
     navigate('/add-reminder');
   };
 
-
   const pendingReminders = reminders.filter(reminder => !reminder.completed);
   const completedReminders = reminders.filter(reminder => reminder.completed);
+
+  
+  const getTimeSlot = (time) => {
+    let hour = parseInt(time.split(':')[0]);
+    const isPM = time.toLowerCase().includes('pm');
+    
+    if (isPM && hour !== 12) {
+      hour += 12;
+    } else if (!isPM && hour === 12) { // Midnight case
+      hour = 0;
+    }
+
+    if (hour >= 5 && hour < 12) return 'Morning';
+    if (hour >= 12 && hour < 17) return 'Afternoon';
+    if (hour >= 17 && hour < 21) return 'Evening';
+    return 'Night'; // Covers 9 PM to 4 AM
+  };
+
+  const groupedReminders = pendingReminders.reduce((acc, reminder) => {
+    const slot = getTimeSlot(reminder.time);
+    if (!acc[slot]) {
+      acc[slot] = [];
+    }
+    acc[slot].push(reminder);
+    return acc;
+  }, {});
+
+  const timeSlots = ['Morning', 'Afternoon', 'Evening', 'Night'];
 
   return (
     <div className="bg-[#f3f4f6]">
@@ -31,46 +58,38 @@ const App = () => {
         <StreakTracker />
         <TimeOfDayFilter />
         
-        {pendingReminders.map(reminder => (
-          <ReminderCard 
-            key={reminder.id}
-            id={reminder.id}
-            title={reminder.title}
-            pet={reminder.pet}
-            time={reminder.time}
-            frequency={reminder.frequency}
-          />
+        {timeSlots.map(slot => (
+          <div key={slot} className="mb-6">
+            <h2 className="text-lg font-semibold text-gray-700 mb-2">{slot}</h2>
+            {(groupedReminders[slot] && groupedReminders[slot].length > 0) ? (
+              groupedReminders[slot].map(reminder => (
+                <ReminderCard 
+                  key={reminder.id}
+                  id={reminder.id}
+                  title={reminder.title}
+                  pet={reminder.pet}
+                  time={reminder.time}
+                  frequency={reminder.frequency}
+                />
+              ))
+            ) : (
+              <p className="text-sm text-gray-500">No reminders for {slot.toLowerCase()}.</p>
+            )}
+          </div>
         ))}
         
         {completedReminders.length > 0 && (
-          <div className="mt-4 mb-4 text-gray-700 font-medium">
-            pending goals
+          <div className="mt-6">
+            <h2 className="text-lg font-semibold text-gray-700 mb-2">Completed Goals</h2>
+            {completedReminders.map(reminder => (
+              <GoalItem 
+                key={reminder.id} 
+                id={reminder.id}
+                title={reminder.title} 
+              />
+            ))}
           </div>
         )}
-        
-        {pendingReminders.find(r => r.title === "Vet visit") && (
-          <ReminderCard 
-            id={pendingReminders.find(r => r.title === "Vet visit").id}
-            title="Vet visit" 
-            pet="For Browny" 
-            time="2:00pm" 
-            frequency="Everyday" 
-          />
-        )}
-        
-        {completedReminders.length > 0 && (
-          <div className="mt-4 mb-4 text-[#858687] font-medium text-xs">
-            completed goals
-          </div>
-        )}
-        
-        {completedReminders.map(reminder => (
-          <GoalItem 
-            key={reminder.id} 
-            id={reminder.id}
-            title={reminder.title} 
-          />
-        ))}
         
         <div className="fixed bottom-24 right-6 z-10">
           <button 
