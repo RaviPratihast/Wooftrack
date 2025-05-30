@@ -1,4 +1,4 @@
-# 🐾 Zooco Reminders App
+# Zooco Reminders App
 
 A daily reminder PWA to help pet parents manage care routines.
 
