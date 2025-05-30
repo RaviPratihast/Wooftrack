@@ -13,7 +13,7 @@ const BottomNav = () => {
       {navItems.map((item) => (
         <button
           key={item.id}
-          className={`flex  items-center justify-center gap-1 p-2 rounded-lg focus:outline-none 
+          className={`flex  items-center justify-center gap-1 p-2 rounded-lg focus:outline-none cursor-pointer 
                       ${item.active ? 'bg-neutral-800 text-white w-auto px-4' : 'text-gray-500'}`}
           aria-label={item.label}
         >

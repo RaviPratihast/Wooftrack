@@ -28,7 +28,7 @@ const StreakTracker = () => {
               {item.day}
             </div>
             <div 
-              className={`mt-1 w-8 h-8 flex items-center justify-center rounded-full text-[16px] font-bold 
+              className={`mt-1 w-8 h-8 flex items-center justify-center rounded-full text-[16px] font-bold cursor-pointer 
                           ${ item.status === 'active' 
                               ? 'bg-[#b9ff7d] text-black' 
                               : item.status === 'past' 

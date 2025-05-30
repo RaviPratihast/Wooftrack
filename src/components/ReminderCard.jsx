@@ -1,13 +1,24 @@
 import React from 'react';
+import { useReminders } from '../context/ReminderContext';
 
 const ReminderCard = ({ 
+  id,
   title = "Morning Walk", 
   pet = "For Browny", 
   time = "2:00pm", 
   frequency = "Everyday" 
 }) => {
+  const { toggleComplete } = useReminders();
+
+  const handleCardClick = () => {
+    toggleComplete(id);
+  };
+
   return (
-    <div className="bg-white rounded-xl p-4 mb-4 shadow-sm">
+    <div 
+      className="bg-white rounded-xl p-4 mb-4 shadow-sm cursor-pointer"
+      onClick={handleCardClick}
+    >
       <div className="flex justify-between items-center">
         <h3 className="text-lg font-semibold">{title}</h3>
         <img src="/expand-01.svg" alt="expand" className="h-4 w-4 opacity-70" />
