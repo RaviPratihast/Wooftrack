@@ -33,11 +33,10 @@ const defaultInitialState = {
       startDate: '2023-10-01',
       endDate: null,
     },
-    // ... add other default reminders if needed
+   
   ]
 };
 
-// Reminder reducer (remains the same)
 const reminderReducer = (state, action) => {
   switch (action.type) {
     case ADD_REMINDER:
@@ -69,12 +68,12 @@ const reminderReducer = (state, action) => {
   }
 };
 
-// Create context
+
 const ReminderContext = createContext();
 
-// Provider component
+
 export const ReminderProvider = ({ children }) => {
-  // Load initial state from localStorage or use default
+
   const loadInitialState = () => {
     try {
       const storedReminders = localStorage.getItem('wooftrackReminders');
@@ -83,21 +82,21 @@ export const ReminderProvider = ({ children }) => {
       }
     } catch (error) {
       console.error("Error loading reminders from localStorage:", error);
-      // Fallback to default if parsing fails or item doesn't exist
+ 
     }
-    return defaultInitialState; // Use default if nothing in localStorage or on error
+    return defaultInitialState; 
   };
 
   const [state, dispatch] = useReducer(reminderReducer, loadInitialState());
   
-  // Save state to localStorage whenever it changes
+ 
   useEffect(() => {
     try {
       localStorage.setItem('wooftrackReminders', JSON.stringify(state));
     } catch (error) {
       console.error("Error saving reminders to localStorage:", error);
     }
-  }, [state]); // Dependency array ensures this runs when state changes
+  }, [state]); 
   
   // Action creators (remain the same)
   const addReminder = (reminder) => {
@@ -126,7 +125,7 @@ export const ReminderProvider = ({ children }) => {
   );
 };
 
-// Custom hook for using the reminder context (remains the same)
+
 export const useReminders = () => {
   const context = useContext(ReminderContext);
   if (!context) {
