@@ -5,7 +5,7 @@ import { useReminders } from '../context/ReminderContext';
 const EditReminder = () => {
   const navigate = useNavigate();
   const { id: reminderId } = useParams();
-  const { reminders, updateReminder } = useReminders(); 
+  const { reminders, updateReminder, deleteReminder } = useReminders();
   const [reminderToEdit, setReminderToEdit] = useState(null);
   const [isReminderSettingsOpen, setIsReminderSettingsOpen] = useState(true);
   const [reminderText, setReminderText] = useState('');
@@ -94,6 +94,13 @@ const EditReminder = () => {
     navigate('/');
   };
 
+  const handleDeleteReminder = () => {
+    if (window.confirm('Are you sure you want to delete this reminder?')) {
+      deleteReminder(reminderId);
+      navigate('/');
+    }
+  };
+
   if (!reminderToEdit) {
 
     return null; 
@@ -107,7 +114,10 @@ const EditReminder = () => {
           <img src="/back button (1).svg" alt="Back" className="h-8 w-8" />
         </button>
         <h1 className="font-semibold text-sm text-neutral-800">Edit Reminder</h1>
-        <button onClick={handleUpdateReminder} className="text-[#019D6B] text-sm font-semibold px-2 py-1 cursor-pointer">Save Changes</button>
+        <div>
+          <button onClick={handleUpdateReminder} className="text-[#019D6B] text-sm font-semibold px-2 py-1 cursor-pointer mr-2">Save Changes</button>
+          <button onClick={handleDeleteReminder} className="text-red-600 text-sm font-semibold px-2 py-1 cursor-pointer">Delete</button>
+        </div>
       </div>
 
       <div className="p-4 space-y-5">
